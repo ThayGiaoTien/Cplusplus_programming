@@ -17,7 +17,7 @@ public:
 
 private:
 	cMaps* m_pCurrentMap;
-
+	olcSprite* m_pFont;
 
 		
 
@@ -25,9 +25,9 @@ protected:
 	virtual bool OnUserCreate()
 	{
 		cAssetsSingleton::get().LoadSprite();
-		m_pCurrentMap = new cMapHome();
+		m_pCurrentMap = new cMapVillage1();
 		//m_pCurrentMap->pSprite = cAssetsSingleton::get().GetSprite("village");
-
+		m_pFont = cAssetsSingleton::get().GetSprite("font");
 		float fPlayerX = 10;
 		float fPlayerY = 15;
 		return true;
@@ -50,9 +50,25 @@ protected:
 				DrawPartialSprite(x*nTileWidth, y*nTileHeight, m_pCurrentMap->pSprite, sx*nTileWidth, sy*nTileHeight, nTileWidth, nTileHeight);
 			}
 		}
+		DrawBigText("Hello mother fucker! ");
 
 
 		return true;
+	}
+
+// UTILITIES===================================================
+public:
+	void DrawBigText(string text)
+	{
+		int i = 0;
+		for (auto c : text)
+		{
+			int sx = (c - 32) % 16 * 8;
+			int sy = (c - 32) / 16 * 8;
+			DrawPartialSprite(20 + i * 8, 20, m_pFont, sx , sy , 8, 8);
+			i++;
+		}
+
 	}
 };
 
