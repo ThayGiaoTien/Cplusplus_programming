@@ -21,3 +21,11 @@ void cRoom::UpdateRoomStatus(const int status)
 {
     nStatus= status;
 }
+cClient* cRoom::GetClient()
+{
+    return client;
+}
+void cRoom::SetClient(cClient* new_client)
+{
+    client= new_client;
+}
