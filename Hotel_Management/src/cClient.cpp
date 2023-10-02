@@ -10,7 +10,8 @@ cClient::cClient(std::string name, std::string sdt, std::string address)
     time_t now = time(0);
     time_checkin= ctime(&now);
     timeCheckIn= time_checkin;
-}   
+    timeCheckOut= time_checkin; // Defautl to prevent segmentation fault;
+} 
 
 std::string cClient::GetClientAddress()
 {
