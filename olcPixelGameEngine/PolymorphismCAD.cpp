@@ -17,9 +17,8 @@ private:
     int nMaxNodes;
     olc::Pixel col;
     // Create tranform fucntion because struct can't access to DrawToWorld/ortherwise utility of PGE
-    
-protected:
-    std::vector<sNode*> vecNodes;
+
+public:
     static float fWorldScale;
     static olc::vf2d vWorldOffset;
     // Convert coordinates from World Space --> Screen Space
@@ -30,6 +29,7 @@ protected:
     }
 
 public:
+    std::vector<sNode> vecNodes;
     sShape()
     {
         col = olc::GREEN;
@@ -51,52 +51,53 @@ public:
     {
         col = colour;
     }
+ 
     virtual void DrawSelf(olc::PixelGameEngine* gfx) = 0;
-    sNode* GetNextNode(olc::vf2d& p)
+    sNode* GetNextNode(const olc::vf2d& p)
     {
         if (vecNodes.size() >= nMaxNodes) return nullptr;
-        else
-        {
-            // create new node and push to vecNodes.
-            sNode newNode;
-            newNode.parent = this;
-            newNode.pos = p;
-            vecNodes.push_back(&newNode);
-        }
-        return vecNodes[vecNodes.size() - 1];
+  
+        // create new node and push to vecNodes.
+        sNode newNode;
+        newNode.parent = this;  
+        newNode.pos = p;
+        vecNodes.push_back(newNode);
+        
+        return &vecNodes[vecNodes.size() - 1];
     }
     void DrawNodes(olc::PixelGameEngine* gfx)
     {
         // Take the world positions
         // Transform into screen
         // Draw.
-        for (auto& n : vecNodes)
+        for (auto &n : vecNodes)
         {
             int sx, sy;
-            WorldToScreen(n->pos, sx, sy);
-            gfx->FillCircle({ sx, sy }, 2, olc::RED);
+            WorldToScreen(n.pos, sx, sy);
+            gfx->FillCircle( sx, sy , 2, GetCol());
         }
     }
 };
 
 // We must define 2 static value of sShape struct. These value will be used for all derived struct.
 float sShape::fWorldScale = 1.0f;
-olc::vf2d sShape::vWorldOffset = { 0.0f, 0.0f };
+olc::vf2d sShape::vWorldOffset = {0,0 };
 
-struct sLine : public sShape
+class sLine : public sShape
 {
 public:
     sLine()
     {
         SetMaxNode(2);
         vecNodes.reserve(GetMaxNodes());
+        std::cout << "Created line\n ";
     }
     // Override DrawSelf fucntion
     void DrawSelf(olc::PixelGameEngine* gfx) override
     {
         int sx, sy, ex, ey;
-        WorldToScreen(vecNodes[0]->pos, sx, sy);
-        WorldToScreen(vecNodes[1]->pos, ex, ey);
+        WorldToScreen(vecNodes[0].pos, sx, sy);
+        WorldToScreen(vecNodes[1].pos, ex, ey);
         gfx->DrawLine(sx, sy, ex, ey, GetCol() );
     }
 };
@@ -147,13 +148,24 @@ protected:
         // Set the default offset to the middle of the screen(center of screen is point (0,0))  
         vOffset = { (float)(-ScreenWidth() / 2) / fScale, (float)(-ScreenHeight() / 2) / fScale };
 
-
+        sLine* n = new sLine();
+        // create new node and push to vecNodes.
+        sNode newNode;
+        newNode.parent = n;
+        newNode.pos = { 0,0 };
+        n->vecNodes.push_back(newNode);
+        sNode newNode2;
+        newNode2.parent = n;
+        newNode2.pos = { 10,0 };
+        n->vecNodes.push_back(newNode2);
+        listShapes.push_back(n);
         return true;
     }
 
 
     bool OnUserUpdate(float fElapsedTime) override
     {
+
 
         // Get current mouse position
         olc::vf2d vMouse = { (float)GetMouseX(), (float)GetMouseY() };
@@ -209,7 +221,11 @@ protected:
         {
             selectedNode->pos = vCursor;
         }
-
+        if (tempShape != nullptr)
+        {
+            std::cout << tempShape->vecNodes[0].pos.x << "-" << tempShape->vecNodes[0].pos.y << std::endl;
+            std::cout << tempShape->vecNodes[1].pos.x << "-" << tempShape->vecNodes[1].pos.y << std::endl;
+        }
         // When user released mouse, place new shape into vecShapes.
         if (GetMouse(0).bReleased)
         {
@@ -220,6 +236,9 @@ protected:
                 {
                     tempShape->SetCol(olc::WHITE);
                     listShapes.push_back(tempShape);
+                    std::cout << "Pushed!\n";
+                    std::cout << tempShape->vecNodes[0].pos.x << "-" << tempShape->vecNodes[0].pos.y << std::endl;
+                    std::cout << tempShape->vecNodes[1].pos.x << "-" << tempShape->vecNodes[1].pos.y << std::endl;
                     tempShape = nullptr;
                 }
                
@@ -267,8 +286,10 @@ protected:
         WorldToScreen({ vWorldBottomRight.x, 0.0f }, ex, ey);
         DrawLine(sx, sy, ex, ey, olc::WHITE, 0xF0F0F0F0);
 
+
         // Draw shapes
         // Draw All Existing Shapes
+       
         for (auto& shape : listShapes)
         {
             shape->DrawSelf(this);
@@ -283,7 +304,7 @@ protected:
 
         // Draw the cursor
         WorldToScreen(vCursor, sx, sy);
-        FillCircle({ sx, sy }, 3, olc::RED);
+        FillCircle({ sx, sy }, 3, olc::YELLOw);
 
         // Print the position of mouse cursor
         DrawString({ 10,10 }, "The mouse cursor: " + std::to_string(vCursor.x) + ", " + std::to_string(vCursor.y), olc::GREEN, 2);
@@ -296,7 +317,7 @@ protected:
 int main()
 {
     PorlymorphismCAD app;
-    if (app.Construct(800, 480, 2, 2))
+    if (app.Construct(800, 480, 1, 1, false))
         app.Start();
 
     return 0;
