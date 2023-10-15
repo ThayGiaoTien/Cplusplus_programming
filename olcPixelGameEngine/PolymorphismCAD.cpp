@@ -34,9 +34,9 @@ public:
     sShape()
     {
         col = olc::GREEN;
-        SetMaxNode(0);
+        SetMaxNodes(0);
     }
-    void SetMaxNode(int nodes)
+    void SetMaxNodes(int nodes)
     {
         nMaxNodes = nodes;
     }
@@ -113,7 +113,7 @@ class sLine : public sShape
 public:
     sLine()
     {
-        SetMaxNode(2);
+        SetMaxNodes(2);
         vecNodes.reserve(GetMaxNodes());
         std::cout << "Created line\n ";
     }
@@ -129,7 +129,86 @@ public:
     }
 };
 
+class sBox : public sShape
+{
+public: 
+    sBox()
+    {
+        SetMaxNodes(2);
+        vecNodes.reserve(GetMaxNodes());
+    }
+    void DrawSelf(olc::PixelGameEngine* gfx) override
+    {   
+        int sx, sy, ex, ey;
+        WorldToScreen(GetVecNodes()[0].pos, sx, sy);
+        WorldToScreen(GetVecNodes()[1].pos, ex, ey);
+        gfx->DrawRect(sx, sy, ex - sx, ey - sy, GetCol());
+    }
+};
 
+class sCircle :public sShape
+{
+public:
+    sCircle()
+    {
+        SetMaxNodes(2);
+        vecNodes.reserve(GetMaxNodes());
+    }
+    void DrawSelf(olc::PixelGameEngine* gfx)
+    {
+        int sx, sy, ex, ey;
+        WorldToScreen(GetVecNodes()[0].pos, sx, sy);
+        WorldToScreen(GetVecNodes()[1].pos, ex, ey);
+        gfx->DrawLine(sx, sy, ex, ey, GetCol(), 0xFF00FF00);
+        float radius = sqrtf((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy));
+        gfx->DrawCircle(sx, sy, (int)radius, GetCol());
+    }
+};
+
+class sCurve :public sShape
+{
+public: 
+    sCurve()
+    {
+        SetMaxNodes(3);
+        vecNodes.reserve(GetMaxNodes());
+    }
+    void DrawSelf(olc::PixelGameEngine* gfx)
+    {
+        int sx, sy, ex, ey;
+        if (vecNodes.size() == 2)
+        {
+            // Can only draw line from first to second
+            WorldToScreen(vecNodes[0].pos, sx, sy);
+            WorldToScreen(vecNodes[1].pos, ex, ey);
+            gfx->DrawLine(sx, sy, ex, ey, GetCol(), 0xFF00FF00);
+        }
+        if (vecNodes.size() == 3)
+        {
+            // Can draw line from first to second
+            WorldToScreen(vecNodes[0].pos, sx, sy);
+            WorldToScreen(vecNodes[1].pos, ex, ey);
+            gfx->DrawLine(sx, sy, ex, ey, GetCol(), 0xFF00FF00);
+
+            // Can draw second structural line
+            WorldToScreen(vecNodes[1].pos, sx, sy);
+            WorldToScreen(vecNodes[2].pos, ex, ey);
+            gfx->DrawLine(sx, sy, ex, ey, GetCol(), 0xFF00FF00);
+
+            // And bezier curve
+            olc::vf2d op = GetVecNodes()[0].pos;
+            olc::vf2d np;
+            for (float t = 0.0f; t < 1.0f; t += 0.01f)
+            {
+                np = (1 - t) * (1 - t) * GetVecNodes()[0].pos + 2 * (1 - t) *t* GetVecNodes()[1].pos + t * t * GetVecNodes()[2].pos;
+                WorldToScreen(op, sx, sy);
+                WorldToScreen(np, ex, ey);
+                gfx->DrawLine(sx, sy, ex, ey, GetCol());
+                op = np;
+            }
+        }
+    }
+};
 
 
 
@@ -228,6 +307,32 @@ protected:
             tempShape = new sLine();
             selectedNode=tempShape->GetNextNode(vCursor);
             selectedNode=tempShape->GetNextNode(vCursor); // Set the temporary second node. Then we'll change it 
+            // when L key is released.
+        }
+        // Draw new Box
+        if (GetKey(olc::Key::B).bPressed)
+        {
+            tempShape = new sBox();
+            selectedNode = tempShape->GetNextNode(vCursor);
+            selectedNode = tempShape->GetNextNode(vCursor); // Set the temporary second node. Then we'll change it 
+            // when L key is released.
+        }
+
+        // Draw new Circle
+        if (GetKey(olc::Key::C).bPressed)
+        {
+            tempShape = new sCircle();
+            selectedNode = tempShape->GetNextNode(vCursor);
+            selectedNode = tempShape->GetNextNode(vCursor); // Set the temporary second node. Then we'll change it 
+            // when L key is released.
+        }
+
+        // Draw new Curve
+        if (GetKey(olc::Key::S).bPressed)
+        {
+            tempShape = new sCurve();
+            selectedNode = tempShape->GetNextNode(vCursor);
+            selectedNode = tempShape->GetNextNode(vCursor); // Set the temporary second node. Then we'll change it 
             // when L key is released.
         }
 
