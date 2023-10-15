@@ -69,6 +69,18 @@ public:
         
         return &vecNodes[vecNodes.size() - 1];
     }
+    sNode* HitNode( olc::vf2d& p)
+    {
+        for (auto& n : vecNodes)
+        {
+            if ((n.pos - p).mag() < 0.01f)
+            {
+                return &n;
+            }
+            
+        }
+        return nullptr;
+    }
     void DrawNodes(olc::PixelGameEngine* gfx)
     {
         // Take the world positions
@@ -217,6 +229,18 @@ protected:
             selectedNode=tempShape->GetNextNode(vCursor);
             selectedNode=tempShape->GetNextNode(vCursor); // Set the temporary second node. Then we'll change it 
             // when L key is released.
+        }
+
+        // Update the node's position
+        if (GetKey(olc::Key::M).bPressed)
+        {
+            selectedNode = nullptr;
+            for (auto& s : listShapes)
+            {
+                selectedNode = s->HitNode(vCursor);
+                if (selectedNode != nullptr)
+                    break;
+            }
         }
 
         // If a node is selected, make it follow the mouse cursor
