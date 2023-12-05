@@ -1,0 +1,562 @@
+
+CAD
+{
+	shape_count=39
+
+	view
+	{
+		offset=-44.625504, -22.725304
+		scale=8.775211
+		grid=1.000000
+	}
+
+
+	shape[0]
+	{
+		node_count=2
+		node[0]=-32.000000, -9.000000
+		node[1]=-32.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[1]
+	{
+		node_count=2
+		node[0]=-36.000000, -9.000000
+		node[1]=-28.000000, -9.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[2]
+	{
+		node_count=2
+		node[0]=-27.000000, -6.000000
+		node[1]=-27.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[3]
+	{
+		node_count=2
+		node[0]=-24.000000, 8.000000
+		node[1]=-24.000000, -6.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[4]
+	{
+		node_count=2
+		node[0]=-24.000000, -6.000000
+		node[1]=-20.000000, -6.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[5]
+	{
+		node_count=2
+		node[0]=-24.000000, 1.000000
+		node[1]=-20.000000, 1.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[6]
+	{
+		node_count=2
+		node[0]=-24.000000, 8.000000
+		node[1]=-20.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[7]
+	{
+		node_count=2
+		node[0]=-23.000000, -9.000000
+		node[1]=-22.000000, -10.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[8]
+	{
+		node_count=2
+		node[0]=-22.000000, -10.000000
+		node[1]=-21.000000, -9.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[9]
+	{
+		node_count=2
+		node[0]=-19.000000, -11.000000
+		node[1]=-17.000000, -13.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[10]
+	{
+		node_count=2
+		node[0]=-27.000000, -8.000000
+		node[1]=-27.000000, -8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[11]
+	{
+		node_count=2
+		node[0]=-18.000000, -6.000000
+		node[1]=-18.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[12]
+	{
+		node_count=2
+		node[0]=-18.000000, -6.000000
+		node[1]=-14.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[13]
+	{
+		node_count=2
+		node[0]=-14.000000, -6.000000
+		node[1]=-14.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[14]
+	{
+		node_count=3
+		node[0]=0.000000, 8.000000
+		node[1]=-10.000000, -10.000000
+		node[2]=0.000000, -7.000000
+
+		custom
+		{
+			shape=curve
+		}
+
+	}
+
+
+	shape[15]
+	{
+		node_count=3
+		node[0]=0.000000, 8.000000
+		node[1]=10.000000, -10.000000
+		node[2]=0.000000, -7.000000
+
+		custom
+		{
+			shape=curve
+		}
+
+	}
+
+
+	shape[16]
+	{
+		node_count=2
+		node[0]=14.000000, -9.000000
+		node[1]=14.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[17]
+	{
+		node_count=2
+		node[0]=10.000000, -9.000000
+		node[1]=18.000000, -9.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[18]
+	{
+		node_count=2
+		node[0]=18.000000, -6.000000
+		node[1]=18.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[19]
+	{
+		node_count=2
+		node[0]=18.000000, 2.000000
+		node[1]=22.000000, 2.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[20]
+	{
+		node_count=2
+		node[0]=22.000000, 2.000000
+		node[1]=22.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[21]
+	{
+		node_count=2
+		node[0]=24.000000, -1.000000
+		node[1]=24.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[22]
+	{
+		node_count=2
+		node[0]=24.000000, 8.000000
+		node[1]=29.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[23]
+	{
+		node_count=2
+		node[0]=29.000000, -1.000000
+		node[1]=29.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[24]
+	{
+		node_count=2
+		node[0]=31.000000, -1.000000
+		node[1]=31.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[25]
+	{
+		node_count=2
+		node[0]=31.000000, 8.000000
+		node[1]=35.000000, 8.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[26]
+	{
+		node_count=2
+		node[0]=35.000000, -1.000000
+		node[1]=35.000000, 16.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[27]
+	{
+		node_count=2
+		node[0]=35.000000, 16.000000
+		node[1]=28.000000, 16.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[28]
+	{
+		node_count=2
+		node[0]=29.000000, -4.000000
+		node[1]=32.000000, -9.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[29]
+	{
+		node_count=2
+		node[0]=-7.000000, 4.000000
+		node[1]=10.000000, -5.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[30]
+	{
+		node_count=2
+		node[0]=8.000000, -5.000000
+		node[1]=10.000000, -5.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[31]
+	{
+		node_count=2
+		node[0]=9.000000, -3.000000
+		node[1]=10.000000, -5.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[32]
+	{
+		node_count=2
+		node[0]=8.000000, -5.000000
+		node[1]=9.000000, -3.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[33]
+	{
+		node_count=2
+		node[0]=-9.000000, 4.000000
+		node[1]=-7.000000, 4.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[34]
+	{
+		node_count=2
+		node[0]=-7.000000, 4.000000
+		node[1]=-8.000000, 6.000000
+
+		custom
+		{
+			shape=line
+		}
+
+	}
+
+
+	shape[35]
+	{
+		node_count=2
+		node[0]=-7.000000, 19.000000
+		node[1]=-8.000000, 20.000000
+
+		custom
+		{
+			shape=circle
+		}
+
+	}
+
+
+	shape[36]
+	{
+		node_count=2
+		node[0]=0.000000, 19.000000
+		node[1]=0.000000, 13.000000
+
+		custom
+		{
+			shape=circle
+		}
+
+	}
+
+
+	shape[37]
+	{
+		node_count=2
+		node[0]=7.000000, 19.000000
+		node[1]=8.000000, 20.000000
+
+		custom
+		{
+			shape=circle
+		}
+
+	}
+
+
+	shape[38]
+	{
+		node_count=2
+		node[0]=-39.000000, -15.000000
+		node[1]=40.000000, 26.000000
+
+		custom
+		{
+			shape=box
+		}
+
+	}
+
+}
+
